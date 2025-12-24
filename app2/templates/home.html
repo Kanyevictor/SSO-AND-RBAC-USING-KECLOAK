@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block extra_styles %}
+.user-info { 
+    background: #d4edda; 
+    padding: 20px; 
+    border-radius: 5px; 
+    margin: 20px 0; 
+}
+.user-info p { margin: 8px 0; }
+.user-info h2 { margin-top: 0; color: #155724; }
+
+.roles { 
+    background: #fff3cd; 
+    padding: 15px; 
+    border-radius: 5px; 
+    margin: 20px 0; 
+}
+.roles h3 { margin-top: 0; color: #856404; }
+
+.role-badge { 
+    display: inline-block; 
+    background: #17a2b8; 
+    color: white; 
+    padding: 6px 14px; 
+    margin: 5px; 
+    border-radius: 15px; 
+    font-size: 14px; 
+}
+
+.section { 
+    margin: 20px 0; 
+    padding: 20px; 
+    border-left: 4px solid #28a745; 
+    background: #f8f9fa; 
+    border-radius: 4px; 
+}
+.section h3 { margin-top: 0; color: #28a745; }
+.section ul { line-height: 1.8; }
+
+.nav { margin: 25px 0; }
+h1 { 
+    border-bottom: 3px solid #28a745; 
+    padding-bottom: 10px; 
+}
+{% endblock %}
+
+{% block content %}
+<h1>🔐 App 2 - RBAC Demo</h1>
+
+<div class="user-info">
+    <h2>Welcome, {{ user.preferred_username }}!</h2>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Name:</strong> {{ user.name or 'Not set' }}</p>
+</div>
+
+<div class="roles">
+    <h3>Your Roles:</h3>
+    {% if roles %}
+        {% for role in roles %}
+            <span class="role-badge">{{ role }}</span>
+        {% endfor %}
+    {% else %}
+        <p style="margin: 10px 0;">⚠️ No roles assigned</p>
+    {% endif %}
+</div>
+
+<div class="section">
+    <h3>🎯 Access Control Demo</h3>
+    <p>Test role-based access control by visiting different pages:</p>
+</div>
+
+<div class="nav">
+    <a href="/public" class="btn btn-primary">📖 Public Page</a>
+    <a href="/viewer" class="btn btn-success">👁️ Viewer Page</a>
+    <a href="/editor" class="btn btn-warning">✏️ Editor Page</a>
+    <a href="/admin" class="btn btn-danger">⚙️ Admin Page</a>
+    <a href="/api/info" class="btn btn-primary">📊 API Info</a>
+    <a href="/logout" class="btn btn-danger">🚪 Logout</a>
+</div>
+
+<div class="section">
+    <h3>📋 Role Requirements</h3>
+    <ul>
+        <li><strong>Public Page:</strong> No authentication required</li>
+        <li><strong>Viewer Page:</strong> Requires 'viewer', 'editor', or 'admin' role</li>
+        <li><strong>Editor Page:</strong> Requires 'editor' or 'admin' role</li>
+        <li><strong>Admin Page:</strong> Requires 'admin' role only</li>
+    </ul>
+</div>
+{% endblock %}

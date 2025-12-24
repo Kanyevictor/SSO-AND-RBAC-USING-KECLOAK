@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Public Page{% endblock %}
+
+{% block content %}
+<h1>📖 Public Page</h1>
+<p>This page is accessible to everyone, even without authentication.</p>
+<p>No roles or permissions are required to view this content.</p>
+
+<div style="background: #e7f3ff; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #007bff;">
+    <h3 style="margin-top: 0;">ℹ️ About Public Access</h3>
+    <p>Public pages are useful for:</p>
+    <ul>
+        <li>Landing pages</li>
+        <li>Documentation</li>
+        <li>General information</li>
+        <li>Login/Registration pages</li>
+    </ul>
+</div>
+
+<a href="/" class="btn btn-primary">← Back to Home</a>
+{% endblock %}
